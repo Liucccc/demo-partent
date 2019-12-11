@@ -1,0 +1,4 @@
+# Project exclude paths
+/demo-biz/target/
+/demo-dao/target/
+/demo-web/target/
