@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan("com.liucccc.demo")
-@MapperScan("com.liucccc.demo")
+@MapperScan("com.liucccc.demo.dao")
 public class DemoWebApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoWebApplication.class, args);
