@@ -1,10 +1,8 @@
-package com.liucccc.demo.web.aop;
+package com.liucccc.demo.commonquery.config;
 
 import com.alibaba.fastjson.JSON;
-import com.liucccc.demo.biz.pojo.bo.WebLog;
-import lombok.extern.slf4j.Slf4j;
+import com.liucccc.demo.commonquery.pojo.bo.WebLog;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.Marker;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -20,7 +18,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.awt.*;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
@@ -40,7 +37,7 @@ import java.util.Map;
 public class WebLogAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
 
-    @Pointcut("execution(public * com.liucccc.demo.web.controller.*.*(..))")
+    @Pointcut("execution(public * com.liucccc.demo.commonquery.controller.*.*(..))")
     public void webLog() {
     }
 

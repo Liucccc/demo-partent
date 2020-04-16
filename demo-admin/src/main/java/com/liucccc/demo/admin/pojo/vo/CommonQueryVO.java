@@ -1,7 +1,6 @@
-package com.liucccc.demo.biz.pojo.vo;
+package com.liucccc.demo.admin.pojo.vo;
 
 import lombok.Data;
-import lombok.Getter;
 
 import java.util.LinkedHashMap;
 
