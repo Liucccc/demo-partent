@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liucccc.demo.commonquery.dao.SysQueryTemplateSubMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.liucccc.demo.commonquery.entity.SysQueryTemplateSub">
+        <id column="sub_id" property="subId" />
+        <result column="template_id" property="templateId" />
+        <result column="tab_alias" property="tabAlias" />
+        <result column="sql_expr" property="sqlExpr" />
+        <result column="sql_where" property="sqlWhere" />
+        <result column="sql_group_by" property="sqlGroupBy" />
+        <result column="del_flag" property="delFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        sub_id, template_id, tab_alias, sql_expr, sql_where, sql_group_by, del_flag
+    </sql>
+
+</mapper>

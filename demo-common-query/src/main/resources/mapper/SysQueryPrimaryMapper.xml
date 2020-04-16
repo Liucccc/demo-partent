@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liucccc.demo.commonquery.dao.SysQueryPrimaryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.liucccc.demo.commonquery.entity.SysQueryPrimary">
+        <id column="query_id" property="queryId" />
+        <result column="query_name" property="queryName" />
+        <result column="fixe_cols" property="fixeCols" />
+        <result column="show_cols" property="showCols" />
+        <result column="sta_cols" property="staCols" />
+        <result column="tab_lst" property="tabLst" />
+        <result column="tab_rel" property="tabRel" />
+        <result column="sql_where" property="sqlWhere" />
+        <result column="sql_order_by" property="sqlOrderBy" />
+        <result column="sql_group_by" property="sqlGroupBy" />
+        <result column="show_cols_code" property="showColsCode" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        query_id, query_name, fixe_cols, show_cols, sta_cols, tab_lst, tab_rel, sql_where, sql_order_by, sql_group_by, show_cols_code
+    </sql>
+
+</mapper>

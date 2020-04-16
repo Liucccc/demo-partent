@@ -1,0 +1,87 @@
+server:
+  port: 8801
+#  servlet:
+#    context-path: /liucccc-demo-admin
+
+spring:
+  application:
+    name: liucccc-demo-admin
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/liucccc?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: localhost
+    port: 6379
+#    cluster.nodes: 127.0.0.1:6379 # 集群版本配置 多个之间用，逗号隔开
+    password:
+#    cluster.max-redirects: 3 #redis最大重连数
+    maxIdle: 5 #最大空闲数
+    maxTotal: 5 #连接池的最大数据库连接数。
+    maxWaitMillis: 1000 #最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
+    minEvictableIdleTimeMillis: 300000 #连接的最小空闲时间 默认1800000毫秒(30分钟)
+    numTestsPerEvictionRun: 3 #每次释放连接的最大数目,默认3
+    timeBetweenEvictionRunsMillis: 30000 # 逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1
+    testOnBorrow: true #是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个
+    testWhileIdle: true #在空闲时检查有效性, 默认false
+
+eureka:
+  client:
+    register-with-eureka: true # false 表示不需要向注册中心注册自己
+    fetch-registry: true # false 表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务
+    service-url:
+      defaultZone: http://admin:123456@localhost:8800/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+logging:
+  file: admin-client.log #添加开启admin的日志监控
+
+feign:
+  hystrix:
+    enabled: true #在Feign中开启Hystrix
+
+# 负载均衡
+ribbon:
+  ConnectTimeout: 1000 #服务请求连接超时时间（毫秒）
+  ReadTimeout: 3000 #服务请求处理超时时间（毫秒）
+  OkToRetryOnAllOperations: true #对超时请求启用重试机制
+  MaxAutoRetriesNextServer: 1 #切换重试实例的最大个数
+  MaxAutoRetries: 1 # 切换实例后重试最大次数
+  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #修改负载均衡算法
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: demo-web-secret #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24)
+  tokenHead: Bearer  #JWT负载中拿到开头
+
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /swagger-ui.html
+      - /swagger-resources/**
+      - /swagger/**
+      - /**/v2/api-docs
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.ico
+      - /webjars/springfox-swagger-ui/**
+      - /actuator/**
+      - /druid/**
+      - /api/login
+      - /api/register
+      - /api/upload

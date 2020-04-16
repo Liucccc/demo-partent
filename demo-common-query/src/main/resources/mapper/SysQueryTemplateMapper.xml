@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liucccc.demo.commonquery.dao.SysQueryTemplateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.liucccc.demo.commonquery.entity.SysQueryTemplate">
+        <id column="template_id" property="templateId" />
+        <result column="template_name" property="templateName" />
+        <result column="menu_id" property="menuId" />
+        <result column="fixed_cols" property="fixedCols" />
+        <result column="tab_lst" property="tabLst" />
+        <result column="condition" property="sqlWhere" />
+        <result column="orderby" property="sqlOrderBy" />
+        <result column="input_user_id" property="inputUserId" />
+        <result column="input_user_name" property="inputUserName" />
+        <result column="input_time" property="inputTime" />
+        <result column="enabled" property="enabled" />
+        <result column="enabled_remark" property="enabledRemark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        template_id, template_name, menu_id, fixed_cols, tab_lst, sql_where, sql_order_by, input_user_id, input_user_name, input_time, enabled, enabled_remark
+    </sql>
+
+</mapper>

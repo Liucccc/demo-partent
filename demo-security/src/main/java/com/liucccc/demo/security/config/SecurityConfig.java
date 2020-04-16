@@ -3,6 +3,7 @@ package com.liucccc.demo.security.config;
 import com.liucccc.demo.security.component.JwtAuthenticationTokenFilter;
 import com.liucccc.demo.security.component.RestfulAccessDeniedHandler;
 import com.liucccc.demo.security.component.RestAuthenticationEntryPoint;
+import com.liucccc.demo.security.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,22 +26,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
-    @Autowired
-    RestfulAccessDeniedHandler restfulAccessDeniedHandler;
-    @Autowired
-    RestAuthenticationEntryPoint restAuthenticationEntryPoint;
-    @Autowired
-    IgnoreUrlsConfig ignoreUrlsConfig;
-
-
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = httpSecurity
                 .authorizeRequests();
         //不需要保护的资源路径允许访问
-        for (String url : ignoreUrlsConfig.getUrls()) {
+        for (String url : ignoreUrlsConfig().getUrls()) {
             registry.antMatchers(url).permitAll();
         }
         //允许跨域请求的OPTIONS请求
@@ -60,11 +51,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 自定义权限拒绝处理类
                 .and()
                 .exceptionHandling()
-                .accessDeniedHandler(restfulAccessDeniedHandler)
-                .authenticationEntryPoint(restAuthenticationEntryPoint)
+                .accessDeniedHandler(restfulAccessDeniedHandler())
+                .authenticationEntryPoint(restAuthenticationEntryPoint())
                 // 自定义权限拦截器JWT过滤器
                 .and()
-                .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
@@ -77,8 +68,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() {
+        return new JwtAuthenticationTokenFilter();
+    }
+
+    @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public RestfulAccessDeniedHandler restfulAccessDeniedHandler() {
+        return new RestfulAccessDeniedHandler();
+    }
+
+    @Bean
+    public RestAuthenticationEntryPoint restAuthenticationEntryPoint() {
+        return new RestAuthenticationEntryPoint();
+    }
+
+    @Bean
+    public IgnoreUrlsConfig ignoreUrlsConfig() {
+        return new IgnoreUrlsConfig();
+    }
+
+    @Bean
+    public JwtTokenUtil jwtTokenUtil() {
+        return new JwtTokenUtil();
     }
 }
