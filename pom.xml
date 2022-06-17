@@ -44,7 +44,7 @@
         <velocity-engine-core.version>2.0</velocity-engine-core.version>
         <jjwt.version>0.9.0</jjwt.version>
         <commons-lang3.version>3.9</commons-lang3.version>
-        <fastjson.version>1.2.62</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <swagger2.version>2.9.2</swagger2.version>
         <jedis.version>3.2.0</jedis.version>
         <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
